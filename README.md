@@ -1,12 +1,14 @@
-# agnoster.zsh-theme
+# async agnoster.zsh-theme
 
-A ZSH theme optimized for people who use:
+`zplug "tholinka/agnoster-zsh-theme", as:theme`
 
-- Solarized
-- Git
-- Unicode-compatible fonts and terminals (I use iTerm2 + Menlo)
+# async information
 
-For Mac users, I highly recommend iTerm 2 + Solarized Dark
+This verison has been extended to allow loading some prompt segments asynchronously, see below on customizing your prompt view for info.
+
+# Libs
+
+* [zsh-async](https://github.com/mafredri/zsh-async), to allow async prompt building
 
 # Compatibility
 
@@ -34,6 +36,10 @@ To test if your terminal and font support it, check that all the necessary chara
 By default prompt has these segments: `prompt_status`, `prompt_context`, `prompt_virtualenv`, `prompt_dir`, `prompt_git`, `prompt_end` in that particular order.
 
 If you want to add, change the order or remove some segments of the prompt, you can use array environment variable named `AGNOSTER_PROMPT_SEGMENTS`.
+
+This version has been extended to allow asynchronous prompt building, based off of [alien](https://github.com/eendroroy/alien), use `AGNOSTER_PROMPT_ASYNC_SEGMENTS` to define which segments should be included only after the prompt loads.  By default `prompt_virtualenv` and `prompt_git` are loaded asynchronously.
+
+This considerably speeds up getting a basic prompt, with the downside being that the async information pops in a few moments later.
 
 Examples:
 - Show all segments of the prompt with indices:
@@ -76,12 +82,6 @@ customize_agnoster() {
 ```
 ![Customization demo](https://github.com/apodkutin/agnoster-zsh-theme/raw/customize-prompt/agnoster_customization.gif)
 
-## Future Work
+# Future work
 
-I don't want to clutter it up too much, but I am toying with the idea of adding RVM (ruby version) and n (node.js version) display.
-
-It's currently hideously slow, especially inside a git repo. I guess it's not overly so for comparable themes, but it bugs me, and I'd love to hear ideas about how to improve the performance.
-
-Would be nice for the code to be a bit more sane and re-usable. Something to easily append a section with a given FG/BG, and add the correct opening and closing.
-
-Also the dependency on a powerline-patched font is regrettable, but there's really no way to get that effect without it. Ideally there would be a way to check for compatibility, or maybe even fall back to one of the similar unicode glyphs.
+Potentially a hg or svn module based off of alien
