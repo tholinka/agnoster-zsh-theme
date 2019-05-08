@@ -5,7 +5,12 @@
 # In order for this theme to render correctly, you will need a
 # [Powerline-patched font](https://gist.github.com/1595572).
 THEME_ROOT=${0:A:h}
-source "${THEME_ROOT}/libs/zsh-async/async.zsh"
+
+# don't source async if already sourced, allows plugin managers to provide it instead
+if ! which async_init &>/dev/null; then
+	source "${THEME_ROOT}/libs/zsh-async/async.zsh"
+fi
+
 source "${THEME_ROOT}/modules/async.zsh"
 
 ### Segments of the prompt, default order declaration
